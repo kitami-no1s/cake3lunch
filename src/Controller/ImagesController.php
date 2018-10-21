@@ -53,6 +53,7 @@ class ImagesController extends AppController
 				return $this->redirect(['controller'=>'Users', 'action'=>'index']);
 			}
 			$image->image_url=$temp['file'];
+                        $image->comment_id = $comment_id;
 			$image=$this->Images->patchEntity($image,$this->request->data);
 			if($this->Images->save($image)){
 				$this->Flash->success(__('画像を登録しました'));
