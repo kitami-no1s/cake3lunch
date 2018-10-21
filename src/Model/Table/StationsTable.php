@@ -6,16 +6,16 @@
     use Cake\ORM\Table;
     use Cake\Validation\Validator;
     
-    class UsersTable extends Table
+    class StationsTable extends Table
     {
         public function initialize(array $config)
         {
             parent::initialize($config);
-            $this->table('users');
+            $this->table('stations');
             $this->displayField('name');
             $this->primaryKey('id');
             
-            $this->hasMany('Comments');
+            $this->hasMany('stations_stores');
         }
         
         public function validationDefault(Validator $validator)
@@ -31,12 +31,10 @@
                         'provider' => 'table',
                         'message' => '登録できません'
                     ]);
-            $validator
-                    ->requirePresence('password', 'create')
-                    ->notEmpty('password');
+
             return $validator;
         }
-
+        
         public function buildRules(RulesChecker $rules)
         {
             $rules->add($rules->isUnique(['name'], ['message' => '登録できません']));
