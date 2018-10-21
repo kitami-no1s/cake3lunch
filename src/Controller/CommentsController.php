@@ -16,24 +16,32 @@
             return true;
         }
         
-        public function add()
+        public function add($store_id = null)
         {
-            $station = $this->Comments->newEntity();
+            try{
+                $store = $this->Comments->Stores->get($store_id);
+            } catch (Exception $ex) {
+                $this->Flash->error(__('error'));
+                return $this->redirect(['controller'=>'Users','action'=>'index']);
+            }
+            $comment = $this->Comments->newEntity();
             if ($this->request->is('post')) {
-                $station = $this->Stations->patchEntity($station, $this->request->data);
-                if ($this->Stations->save($station)) {
-                    $this->Flash->success(__('駅を登録しました'));
+                $comment = $this->Comments->patchEntity($comment, $this->request->data);
+                $comment->store_id = $store_id;
+                $comment->user_id = $this->Auth->user('id');
+                if ($this->Comments->save($comment)) {
+                    $this->Flash->success(__('コメントを投稿しました'));
                     
                     return $this->redirect(['action' => 'index']);
                 }
-                $this->Flash->error(__('駅の登録に失敗しました'));
+                $this->Flash->error(__('コメントの投稿に失敗しました'));
             }
-            $this->set(compact('station'));
+            $this->set(compact('comment'));
         }
         
         public function index()
         {
-            $stations = $this->paginate($this->Stations);
-            $this->set(compact('stations'));
+            $comments = $this->paginate($this->Comments);
+            $this->set(compact('comments'));
         }
     }

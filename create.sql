@@ -27,8 +27,7 @@ CREATE TABLE comments(
 	id int(11) not null auto_increment,
 	store_id int(11) not null,
 	comment text default null,
-	comment_id int(11),
-	created_at datetime default null,
+	created datetime default current_timestamp,
         user_id int(11) not null,
 	PRIMARY KEY (id)
 );
