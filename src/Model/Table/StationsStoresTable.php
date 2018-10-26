@@ -11,7 +11,7 @@ class StationsStoresTable extends Table
     public function initialize(array $config)
     {
         parent::initialize($config);
-        $this->setTable('StationsStores');
+        $this->setTable('stations_stores');
         $this->setPrimaryKey('station_id');
     }
     
