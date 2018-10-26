@@ -27,31 +27,36 @@
                 'keyField' => 'id',
                 'valueField' => 'name',
             ]);
-            
-            $store = $this->s_s->newEntity();
+
             //　登録ボタン押下
             if ($this->request->is('post')) {
                 $transaction = ConnectionManager::get('default');
+                //　トランザクション開始
                 $transaction->begin();
                 try{
                     $store = $this->Stores->newEntity([
                             'name' => $this->request->getData('name'),
                             'address'=> $this->request->getData('address')
                     ]);
+                    //　店舗先に登録
                     $store = $this->Stores->save($store);
+                    //　今登録したしたID取得
                     $store_id = $store->id;
                     
-                    $s_s = $this->s_s->newEntity([
+                    
+                    $StationsStores = $this->StationsStores->newEntity([
                             'station_id' => $this->request->getData('station_id'),
                             'store_id' => $store_id
                     ]);
                     
-                    $this->s_s->save($s_s);
+                    $this->StationsStores->save($StationsStores);
+                    //　トランザクションコミット
                     $transaction->commit();
                     $this->Flash->success(__('お店を登録しました'));
                     $this->redirect(['Controller'=>'Stores','action'=>'index']);
                 }catch(\Exception $e){
                     $this->Flash->error(__('お店の登録に失敗しました'));
+                    // SQLなかったことにする
                     $transaction->rollback();
                 } 
             }
