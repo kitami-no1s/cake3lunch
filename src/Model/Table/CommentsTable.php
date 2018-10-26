@@ -11,8 +11,8 @@
         public function initialize(array $config)
         {
             parent::initialize($config);
-            $this->table('comments');
-            $this->primaryKey('id');
+            $this->setTable('comments');
+            $this->setPrimaryKey('id');
             $this->addBehavior('Timestamp');
             
             $this->belongsTo('Users');

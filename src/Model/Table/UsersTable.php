@@ -11,9 +11,9 @@
         public function initialize(array $config)
         {
             parent::initialize($config);
-            $this->table('users');
-            $this->displayField('name');
-            $this->primaryKey('id');
+            $this->setTable('users');
+            $this->setDisplayField('name');
+            $this->setPrimaryKey('id');
             
             $this->hasMany('Comments');
         }
