@@ -11,9 +11,9 @@
         public function initialize(array $config)
         {
             parent::initialize($config);
-            $this->table('stores');
-            $this->displayField('name');
-            $this->primaryKey('id');
+            $this->setTable('stores');
+            $this->setDisplayField('name');
+            $this->setPrimaryKey('id');
             
             $this->hasMany('Comments');
             $this->hasMany('stations_stores');

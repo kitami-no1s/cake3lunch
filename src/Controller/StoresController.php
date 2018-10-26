@@ -11,7 +11,7 @@
         {
             parent::initialize();
             $this->Stations = TableRegistry::getTableLocator()->get('stations');
-            $this->s_s = TableRegistry::getTableLocator()->get('stations_stores');
+            $this->s_s = TableRegistry::getTableLocator()->get('StationsStores');
         }
         
         public function isAuthorized($user = null)
@@ -37,13 +37,12 @@
                     $store = $this->Stores->patchEntity($store, $this->request->data);
                     if(!$this->Stores->save($store)){
                         $this->Flash->error(__('店舗テーブルのほうのエラー'));
+                        $transaction->rollback();
                     }
-             
-                    $s_s = $this->s_s->create();
-                    $s_s[store_id] = $store->id;
-                    $s_s[station_id] = $this->request->getData('station_id');
-                    dump($s_s);
-                    $this->s_s->save($s_s);
+                    $entity = $this->s_s->create();
+                    $entity = $this->s_s->save($entity, ['stations_id'=>$this->request->getData('station_id'),
+                                                                'store_id'=>$store->id                       
+                                                                ]);
                     $this->Flash->success(__('お店を登録しました'));
                     $transaction->commit();
                     $this->redirect(['Controller'=>'Stores','action'=>'index']);
