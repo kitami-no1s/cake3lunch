@@ -12,9 +12,6 @@
         {
             parent::initialize($config);
             $this->table('stations_stores');
-            
-            $this->belongsTo('stations');
-            $this->belongsTo('stores');
         }
         
     }

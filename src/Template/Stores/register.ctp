@@ -2,6 +2,7 @@
 <?php
     echo $this->Form->create($store);
     echo $this->Form->input('name');
+    echo $this->Form->select('station_id',$list);
     echo $this->Form->input('address');
     echo $this->Form->button('登録');
     echo $this->Form->end();
