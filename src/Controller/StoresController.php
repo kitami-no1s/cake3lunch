@@ -11,7 +11,7 @@
         {
             parent::initialize();
             $this->Stations = TableRegistry::getTableLocator()->get('stations');
-            $this->s_s = TableRegistry::getTableLocator()->get('stations_stores');
+            $this->StationsStores = TableRegistry::getTableLocator()->get('stations_stores');
         }
         
         public function isAuthorized($user = null)
