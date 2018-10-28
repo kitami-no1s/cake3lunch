@@ -11,7 +11,7 @@
         {
             parent::initialize();
             $this->Stations = TableRegistry::getTableLocator()->get('stations');
-            $this->s_s = TableRegistry::getTableLocator()->get('StationsStores');
+            $this->StationsStores = TableRegistry::getTableLocator()->get('stations_stores');
         }
         
         public function isAuthorized($user = null)
@@ -27,27 +27,36 @@
                 'keyField' => 'id',
                 'valueField' => 'name',
             ]);
-            $store = $this->Stores->newEntity();
-            
+
             //　登録ボタン押下
             if ($this->request->is('post')) {
                 $transaction = ConnectionManager::get('default');
+                //　トランザクション開始
                 $transaction->begin();
                 try{
-                    $store = $this->Stores->patchEntity($store, $this->request->data);
-                    if(!$this->Stores->save($store)){
-                        $this->Flash->error(__('店舗テーブルのほうのエラー'));
-                        $transaction->rollback();
-                    }
-                    $entity = $this->s_s->create();
-                    $entity = $this->s_s->save($entity, ['stations_id'=>$this->request->getData('station_id'),
-                                                                'store_id'=>$store->id                       
-                                                                ]);
-                    $this->Flash->success(__('お店を登録しました'));
+                    $store = $this->Stores->newEntity([
+                            'name' => $this->request->getData('name'),
+                            'address'=> $this->request->getData('address')
+                    ]);
+                    //　店舗先に登録
+                    $store = $this->Stores->save($store);
+                    //　今登録したしたID取得
+                    $store_id = $store->id;
+                    
+                    
+                    $StationsStores = $this->StationsStores->newEntity([
+                            'station_id' => $this->request->getData('station_id'),
+                            'store_id' => $store_id
+                    ]);
+                    
+                    $this->StationsStores->save($StationsStores);
+                    //　トランザクションコミット
                     $transaction->commit();
+                    $this->Flash->success(__('お店を登録しました'));
                     $this->redirect(['Controller'=>'Stores','action'=>'index']);
                 }catch(\Exception $e){
                     $this->Flash->error(__('お店の登録に失敗しました'));
+                    // SQLなかったことにする
                     $transaction->rollback();
                 } 
             }
