@@ -5,7 +5,8 @@
     use Cake\ORM\RulesChecker;
     use Cake\ORM\Table;
     use Cake\Validation\Validator;
-    
+use Phinx\Db\Table\ForeignKey;
+                    
     class StoresTable extends Table
     {
         public function initialize(array $config)
@@ -16,7 +17,8 @@
             $this->setPrimaryKey('id');
             
             $this->hasMany('Comments');
-            $this->hasMany('stations_stores');
+            $this->belongsToMany('stations',['joinTable'=>'stations_stores']);
+            //$this->hasMany('stations_stores',['ForeignKey'=>'store_id']);
         }
         
         public function validationDefault(Validator $validator)

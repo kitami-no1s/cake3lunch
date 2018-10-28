@@ -7,6 +7,8 @@
     
     class StoresController extends AppController
     {
+        public $paginate = ['contain'=>'stations'];
+        
         public function initialize()
         {
             parent::initialize();
@@ -45,10 +47,9 @@
                     
                     
                     $StationsStores = $this->StationsStores->newEntity([
-                            'station_id' => $this->request->getData('station_id'),
-                            'store_id' => $store_id
-                    ]);
-                    
+                        'station_id' => $this->request->getData('station_id'),
+                        'store_id' => $store_id
+                    ]);                    
                     $this->StationsStores->save($StationsStores);
                     //　トランザクションコミット
                     $transaction->commit();
@@ -65,7 +66,9 @@
         
         public function index()
         {
+          
             $stores = $this->paginate($this->Stores);
+            
             $this->set(compact('stores'));
         }
     }

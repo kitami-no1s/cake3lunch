@@ -12,7 +12,14 @@ class StationsStoresTable extends Table
     {
         parent::initialize($config);
         $this->setTable('stations_stores');
-        $this->setPrimaryKey('station_id','store_id');
+        $this->setPrimaryKey('id');
+        
+        /*$this->belongsTo('stations',[
+            'foreignKey' => 'station_id'
+        ]);
+        $this->belongsTo('stores',[
+            'foreignKey' => 'store_id'
+        ]);*/
     }
     
 }

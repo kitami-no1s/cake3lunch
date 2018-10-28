@@ -7,5 +7,6 @@ class StationsStore extends Entity
 {
     protected $_accesible = [
         '*' => true,
+        'id' => false
     ];
 }

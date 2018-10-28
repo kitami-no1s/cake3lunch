@@ -52,7 +52,8 @@ CREATE TABLE images(
 
 DROP TABLE IF EXISTS stations_stores;
 CREATE TABLE stations_stores(
+	id int(11) not null auto_increment,
 	station_id int(11) not null,
 	store_id int(11) not null,
-	PRIMARY KEY(station_id,store_id)
+	PRIMARY KEY(id)
 );

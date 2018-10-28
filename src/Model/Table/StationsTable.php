@@ -15,7 +15,8 @@ class StationsTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
-        $this->hasMany('stations_stores');
+        $this->belongsToMany('stores',['joinTable'=>'stations_stores']);
+        //$this->hasMany('stations_stores');
     }
 
     public function validationDefault(Validator $validator)
