@@ -43,6 +43,7 @@ class AppController extends Controller
         
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+        $this->loadComponent('Sidebar');
         
         $this->loadComponent('Auth', [
             'authorize' => ['Controller'],
@@ -79,6 +80,10 @@ class AppController extends Controller
         parent::beforeFilter($event);
         
         $this->Auth->allow(['index']);
+        
+        $lists = $this->Sidebar->index();
+        
+        $this->set(compact('lists'));
     }
     
     /**
