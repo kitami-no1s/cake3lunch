@@ -32,7 +32,20 @@ $this->prepend ( 'script', $this->Html->script ( [
 	<?=$this->fetch('css') ?>
 </head>
 <body>
-	<?=$this->element('menu') ?>
-	<?=$this->element('content') ?>
+    <div class="container">
+        <div class="row">
+            <div class ="col-12">
+                <?=$this->element('menu') ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <?=$this->element('sidebar') ?>
+            </div>
+            <div class="col-10">
+                <?=$this->element('content') ?>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

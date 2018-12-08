@@ -19,3 +19,18 @@
 #aiu {
 	display: none;
 }
+
+.fade:not(.show) {
+    opacity: 100;
+}
+.container {
+    margin: 0;
+    padding: 0;
+}
+/*
+.scroll-box {
+    height: 300px;
+    position: relative;
+    overflow-y: scroll;
+}
+*/
