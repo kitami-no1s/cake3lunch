@@ -9,7 +9,6 @@ window.onload = function(){
 		    target.style.display = "none";
 		    btn1.style.display = "block";
 		    btn2.style.display = "none";
-		    stations.children.style.display = "none";
 		}else{ 
 			target.style.display = "block";
 			btn1.style.display = "none";

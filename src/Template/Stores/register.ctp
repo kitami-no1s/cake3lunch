@@ -3,7 +3,7 @@
 <h1 class="page-header">店登録(仮)</h1>
 	<?= $this->Form->create();?>
 	<div>店名</div>
-	<?= $this->Form->text('name',["div"=>false,"label"=>false,"class"=>''])?>
+	<?= $this->Form->text('name',["div"=>false,"label"=>false])?>
 	<div>駅名</div>
 	<?= $this->Form->text('station_name',["div"=>false,"label"=>false,"id"=>'station',"class"=>''])?>
 	<nobar id = "btn">

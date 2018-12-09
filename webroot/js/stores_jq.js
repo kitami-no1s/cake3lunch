@@ -38,4 +38,11 @@ $(function(){
 		$("#station").val($(this).text());
 	});
 	
+	$('#btn').on('click',function(){
+		if($('#target').css('display') == 'block'){
+			$("#stations div").hide();
+		}else{
+			$("#stations div").show();
+		}
+	});
 });
