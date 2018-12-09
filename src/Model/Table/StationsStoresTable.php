@@ -14,12 +14,7 @@ class StationsStoresTable extends Table
         $this->setTable('stations_stores');
         $this->setPrimaryKey('id');
         
-        /*$this->belongsTo('stations',[
-            'foreignKey' => 'station_id'
-        ]);
-        $this->belongsTo('stores',[
-            'foreignKey' => 'store_id'
-        ]);*/
-    }
-    
+        $this->belongsTo('stations');
+        $this->belongsTo('stores');
+    }   
 }

@@ -1,1 +1,1 @@
-LOAD DATA INFILE "../../htdocs/cake3lunch/import/tokyo_station_list.csv" INTO table cake3lunch.stations FIELDS terminated by ',' enclosed by '"' escaped by '"' lines terminated by "\r\n" (name,line,prefecture_no,initial);
+LOAD DATA INFILE "../../htdocs/cake3lunch/import/tokyo_station_list.csv" INTO table cake3lunch.stations FIELDS terminated by ',' enclosed by '"' escaped by '"' lines terminated by "\n" (name,line,prefecture_no,initial);
