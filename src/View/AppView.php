@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -22,23 +23,29 @@ use Cake\View\View;
  *
  * @link https://book.cakephp.org/3.0/en/views.html#the-app-view
  */
-class AppView extends View
-{
+class AppView extends View {
 
-    /**
-     * Initialization hook method.
-     *
-     * Use this method to add common initialization code like loading helpers.
-     *
-     * e.g. `$this->loadHelper('Html');`
-     *
-     * @return void
-     */
-    public function initialize()
-    {
-        $this->loadHelper('Html', ['className' => 'BootstrapUI.Html']);
-        $this->loadHelper('Form', ['className' => 'BootstrapUI.Form']);
-        $this->loadHelper('Flash', ['className' => 'BootstrapUI.Flash']);
-        $this->loadHelper('Paginater', ['className' => 'BootstrapUI.Paginator']);
-    }
+	/**
+	 * Initialization hook method.
+	 *
+	 * Use this method to add common initialization code like loading helpers.
+	 *
+	 * e.g. `$this->loadHelper('Html');`
+	 *
+	 * @return void
+	 */
+	public function initialize() {
+		$this->loadHelper ( 'Html', [ 
+				'className' => 'BootstrapUI.Html'
+		] );
+		$this->loadHelper ( 'Form', [ 
+				'className' => 'BootstrapUI.Form'
+		] );
+		$this->loadHelper ( 'Flash', [ 
+				'className' => 'BootstrapUI.Flash'
+		] );
+		$this->loadHelper ( 'Paginater', [ 
+				'className' => 'BootstrapUI.Paginator'
+		] );
+	}
 }
