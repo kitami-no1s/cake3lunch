@@ -40,7 +40,7 @@ class ImagesController extends AppController
 		if($this->request->is('post')){
 			//dump($this->request->data['file_name']);
 			//move_upload_file
-			$dir = realpath(WWW_ROOT . "/upload_img");
+			$dir = realpath(WWW_ROOT . "/img");
 			$limitFileSize = 1024 * 1024;
 			$temp['file']="";
 			try {

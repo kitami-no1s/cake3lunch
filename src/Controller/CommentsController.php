@@ -5,7 +5,7 @@
     
     class CommentsController extends AppController
     {
-        public function initializa()
+        public function initialize()
         {
             parent::initialize();
             
@@ -41,7 +41,11 @@
         
         public function index()
         {
-            $comments = $this->paginate($this->Comments);
-            $this->set(compact('comments'));
+            
+            $this->paginate =[
+                'contain' => ['Images'],
+                'order' => ['created' => 'desc']
+            ];
+            $this->set('comments', $this->paginate($this->Comments));
         }
     }
