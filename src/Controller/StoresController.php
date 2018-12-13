@@ -22,10 +22,12 @@ class StoresController extends AppController {
 	public function search() {
 		$this->autoRender = false;
 		if ($this->request->is ( 'ajax' )) {
-			// ajaxで送られてきた五十音をもとに検索、
+			// ajaxで送られてきた駅名をもとに検索、
 			$word = $this->request->getData ( 'word' );
 			$stations = TableRegistry::getTableLocator ()->get ( 'stations' );
-			$list = $stations->find ()->select(['name'])->where(['name LIKE'=>'%'.$word.'%'])->toArray();
+			$list = $stations->find ()->select(['name'])
+			->where(['name LIKE'=>'%'.$word.'%'])
+			->toArray();
 			
 			$data = "";
 			foreach ( $list as $val ) {

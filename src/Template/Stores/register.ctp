@@ -1,4 +1,3 @@
-<?php $this->prepend('script',$this->Html->script('stores'));?>
 <?php $this->prepend('script',$this->Html->script('stores_jq'));?>
 <h1 class="page-header">店登録(仮)</h1>
 <?= $this->Form->create();?>
@@ -6,9 +5,9 @@
 <?= $this->Form->text('name',["div"=>false,"label"=>false])?>
 <div>駅名</div>
 <?= $this->Form->text('station_name',["div"=>false,"label"=>false,"id"=>'station',"class"=>''])?>
-<?= $this -> Form -> button ( "Search", [ "id" => "search" ])?>
-<nobar id="btn"> <nobar id="btn1">五十音から探す&#9654</nobar> <nobar id="btn2">五十音から探す&#9660</nobar>
-</nobar>
+<?= $this -> Form -> button ( "検索", [ "id" => "search","type"=>"button"])?>
+<div id="btn"> <nobar id="btn1">五十音から探す&#9654</nobar> <nobar id="btn2">五十音から探す&#9660</nobar>
+</div>
 <div id="target">
 	<!-- テンプレート化したい -->
 	<div id="akasa">
