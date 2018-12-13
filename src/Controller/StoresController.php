@@ -19,6 +19,21 @@ class StoresController extends AppController {
 	public function isAuthorized($user = null) {
 		return true;
 	}
+	public function search() {
+		$this->autoRender = false;
+		if ($this->request->is ( 'ajax' )) {
+			// ajaxで送られてきた五十音をもとに検索、
+			$word = $this->request->getData ( 'word' );
+			$stations = TableRegistry::getTableLocator ()->get ( 'stations' );
+			$list = $stations->find ()->select(['name'])->where(['name LIKE'=>'%'.$word.'%'])->toArray();
+			
+			$data = "";
+			foreach ( $list as $val ) {
+				$data .= "<div>" . $val ['name'] . "</div>";
+			}
+			echo json_encode ( $data );
+		}
+	}
 	public function gojyuon() {
 		$this->autoRender = false;
 		if ($this->request->is ( 'ajax' )) {

@@ -13,7 +13,7 @@ window.onload = function(){
 			target.style.display = "block";
 			btn1.style.display = "none";
 			btn2.style.display = "block";
-			stations.children.style.display = "block";
+			//stations.children.style.display = "block";
 		}
 	};
 };

@@ -6,6 +6,7 @@
 <?= $this->Form->text('name',["div"=>false,"label"=>false])?>
 <div>駅名</div>
 <?= $this->Form->text('station_name',["div"=>false,"label"=>false,"id"=>'station',"class"=>''])?>
+<?= $this -> Form -> button ( "Search", [ "id" => "search" ])?>
 <nobar id="btn"> <nobar id="btn1">五十音から探す&#9654</nobar> <nobar id="btn2">五十音から探す&#9660</nobar>
 </nobar>
 <div id="target">
