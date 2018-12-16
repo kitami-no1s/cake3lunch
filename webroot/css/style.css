@@ -11,3 +11,25 @@
     position: relative;
     overflow-y: scroll;
 }
+
+#target {
+	display: none;
+	overflow: hidden;
+}
+
+#btn1 {
+	display: block;
+}
+
+#btn2 {
+	display: none;
+}
+
+#target div {
+	float: left;
+	margin-right: 30px;
+}
+
+#aiu {
+	display: none;
+}

@@ -54,3 +54,4 @@
             $this->set('comments', $this->paginate($this->Comments));
         }
     }
+

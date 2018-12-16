@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -26,61 +27,57 @@ use InvalidArgumentException;
 /**
  * ApplicationTest class
  */
-class ApplicationTest extends IntegrationTestCase
-{
+class ApplicationTest extends IntegrationTestCase {
 
-    /**
-     * testBootstrap
-     *
-     * @return void
-     */
-    public function testBootstrap()
-    {
-        $app = new Application(dirname(dirname(__DIR__)) . '/config');
-        $app->bootstrap();
-        $plugins = $app->getPlugins();
+	/**
+	 * testBootstrap
+	 *
+	 * @return void
+	 */
+	public function testBootstrap() {
+		$app = new Application ( dirname ( dirname ( __DIR__ ) ) . '/config' );
+		$app->bootstrap ();
+		$plugins = $app->getPlugins ();
 
-        $this->assertCount(3, $plugins);
-        $this->assertSame('Bake', $plugins->get('Bake')->getName());
-        $this->assertSame('Migrations', $plugins->get('Migrations')->getName());
-        $this->assertSame('DebugKit', $plugins->get('DebugKit')->getName());
-    }
+		$this->assertCount ( 3, $plugins );
+		$this->assertSame ( 'Bake', $plugins->get ( 'Bake' )->getName () );
+		$this->assertSame ( 'Migrations', $plugins->get ( 'Migrations' )->getName () );
+		$this->assertSame ( 'DebugKit', $plugins->get ( 'DebugKit' )->getName () );
+	}
 
-    /**
-     * testBootstrapPluginWitoutHalt
-     *
-     * @return void
-     */
-    public function testBootstrapPluginWitoutHalt()
-    {
-        $this->expectException(InvalidArgumentException::class);
+	/**
+	 * testBootstrapPluginWitoutHalt
+	 *
+	 * @return void
+	 */
+	public function testBootstrapPluginWitoutHalt() {
+		$this->expectException ( InvalidArgumentException::class );
 
-        $app = $this->getMockBuilder(Application::class)
-            ->setConstructorArgs([dirname(dirname(__DIR__)) . '/config'])
-            ->setMethods(['addPlugin'])
-            ->getMock();
+		$app = $this->getMockBuilder ( Application::class )->setConstructorArgs ( [ 
+				dirname ( dirname ( __DIR__ ) ) . '/config'
+		] )->setMethods ( [ 
+				'addPlugin'
+		] )->getMock ();
 
-        $app->method('addPlugin')
-            ->will($this->throwException(new InvalidArgumentException('test exception.')));
+		$app->method ( 'addPlugin' )->will ( $this->throwException ( new InvalidArgumentException ( 'test exception.' ) ) );
 
-        $app->bootstrap();
-    }
+		$app->bootstrap ();
+	}
 
-    /**
-     * testMiddleware
-     *
-     * @return void
-     */
-    public function testMiddleware()
-    {
-        $app = new Application(dirname(dirname(__DIR__)) . '/config');
-        $middleware = new MiddlewareQueue();
+	/**
+	 * testMiddleware
+	 *
+	 * @return void
+	 */
+	public function testMiddleware() {
+		$app = new Application ( dirname ( dirname ( __DIR__ ) ) . '/config' );
+		$middleware = new MiddlewareQueue ();
 
-        $middleware = $app->middleware($middleware);
+		$middleware = $app->middleware ( $middleware );
 
-        $this->assertInstanceOf(ErrorHandlerMiddleware::class, $middleware->get(0));
-        $this->assertInstanceOf(AssetMiddleware::class, $middleware->get(1));
-        $this->assertInstanceOf(RoutingMiddleware::class, $middleware->get(2));
-        $this->assertInstanceOf(CsrfProtectionMiddleware::class, $middleware->get(3));
-    }
+		$this->assertInstanceOf ( ErrorHandlerMiddleware::class, $middleware->get ( 0 ) );
+		$this->assertInstanceOf ( AssetMiddleware::class, $middleware->get ( 1 ) );
+		$this->assertInstanceOf ( RoutingMiddleware::class, $middleware->get ( 2 ) );
+		$this->assertInstanceOf ( CsrfProtectionMiddleware::class, $middleware->get ( 3 ) );
+	}
 }
