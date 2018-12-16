@@ -10,7 +10,8 @@ use App\Form\StoresForm;
 
 class StoresController extends AppController {
 	public $paginate = [ 
-			'contain' => 'stations'
+			'contain' => 'stations',
+			'limit' => 5,
 	];
 	public function initialize() {
 		parent::initialize ();
