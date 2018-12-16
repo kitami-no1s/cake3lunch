@@ -7,6 +7,10 @@
     
     class StoresController extends AppController
     {
+        public $paginate = [
+            'limit' => 5,
+        ];
+        
         public function initialize()
         {
             parent::initialize();

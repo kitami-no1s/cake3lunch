@@ -43,4 +43,14 @@
             $stations = $this->paginate($this->Stations);
             $this->set(compact('stations'));
         }
+        
+        public function result()
+        {
+            
+            $this->paginate =[
+                'contain' => ['Images'],
+                'order' => ['created' => 'desc']
+            ];
+            $this->set('comments', $this->paginate($this->Comments));
+        }
     }
