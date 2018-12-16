@@ -36,8 +36,13 @@ class CommentsController extends AppController {
 		}
 		$this->set ( compact ( 'comment' ) );
 	}
-	public function index() {
-		$comments = $this->paginate ( $this->Comments );
-		$this->set ( compact ( 'comments' ) );
-	}
+	public function index()
+        {
+            
+            $this->paginate =[
+                'contain' => ['Images'],
+                'order' => ['created' => 'desc']
+            ];
+            $this->set('comments', $this->paginate($this->Comments));
+        }
 }
