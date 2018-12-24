@@ -11,8 +11,8 @@
         public function initialize(array $config)
         {
             parent::initialize($config);
-            $this->table('images');
-            $this->primaryKey('id');
+            $this->setTable('images');
+            $this->setPrimaryKey('id');
             
             $this->belongsTo('Comments');
         }

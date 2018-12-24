@@ -27,9 +27,8 @@ CREATE TABLE comments(
 	id int(11) not null auto_increment,
 	store_id int(11) not null,
 	comment text default null,
-	comment_id int(11),
-	created_at datetime default null,
-        user_id int(11) not null,
+	created datetime default current_timestamp,
+    user_id int(11) not null,
 	PRIMARY KEY (id)
 );
 
@@ -37,6 +36,9 @@ DROP TABLE IF EXISTS stations;
 CREATE TABLE stations(
 	id int(11) not null auto_increment,
 	name varchar(255) not null,
+	line text default null,
+	prefecture_no int(11),
+	initial varchar(255) not null,
 	PRIMARY KEY (id)
 );
 
@@ -50,6 +52,8 @@ CREATE TABLE images(
 
 DROP TABLE IF EXISTS stations_stores;
 CREATE TABLE stations_stores(
+	id int(11) not null auto_increment,
 	station_id int(11) not null,
-	stores_id int(11) not null
+	store_id int(11) not null,
+	PRIMARY KEY(id)
 );

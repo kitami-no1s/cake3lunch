@@ -1,17 +1,15 @@
-<h1 class="page-header">登録店一覧</h1>
+<h1 class="page-header">投稿一覧(仮)</h1>
 <table class="table table-striped" cellpadding="0" cellspacing="0">
     <tr>
         <th scope="col"><?= $this->Paginator->sort('id') ?></th>
         <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-        <th scope="col"><?= $this->Paginator->sort('address') ?></th>
-        <th scope="col">投稿する</th>
+        <th scope="col">画像</th>
     </tr>
-    <?php foreach ($stores as $store): ?>
+    <?php foreach ($comments as $comment): ?>
         <tr>
-            <td><?= $this->Number->format($store->id) ?></td>
-            <td><?= h($store->name) ?></td>
-            <td><?= h($store->address) ?></td>
-            <td><?= $this->Html->link("投稿する", ['controller' => 'comments','action' => 'add', $store->id ]); ?></td>
+            <td><?= $this->Number->format($comment->id) ?></td>
+            <td><?= h($comment->comment) ?></td>
+            <td><?= $this->Html->link("画像を追加する", ['controller' => 'images','action' => 'add', $comment->id ]); ?></td>
         </tr>
     <?php endforeach; ?>
 </table>
