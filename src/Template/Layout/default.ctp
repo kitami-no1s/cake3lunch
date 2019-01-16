@@ -30,7 +30,7 @@ $this->prepend('script',$this->Html->script([
 	<?=$this->fetch('css') ?>
 </head>
 <body>
-	<?=$this->element('menu') ?>
+	<?=$this->element('menu/' .$menu) ?>
 	<?=$this->element('content') ?>
 </body>
 </html>
