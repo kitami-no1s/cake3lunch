@@ -44,13 +44,23 @@
             $this->set(compact('stations'));
         }
         
-        public function result()
+        public function result($id)
         {
-            
+            $query = $this->Stations->Stores->Comments
+                    ->find('all')
+                    ->contain(['Stores','Images'])
+                    ->contain('Stores.Stations', function (Query $q) {
+                        return $q
+                                ->select(['id'])
+                                ->where(['Stations.id' => $id]);
+                    })
+                    ->order(['created' => 'desc']);
+            /*
             $this->paginate =[
                 'contain' => ['Images'],
                 'order' => ['created' => 'desc']
             ];
-            $this->set('comments', $this->paginate($this->Comments));
+             */
+            $this->set('comments', $this->paginate($query));
         }
     }
