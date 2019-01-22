@@ -35,7 +35,7 @@ $this->prepend ( 'script', $this->Html->script ( [
     <div class="container">
         <div class="row">
             <div class ="col-12">
-                <?=$this->element('menu') ?>
+                <?=$this->element($menu) ?>
             </div>
         </div>
         <div class="row">
