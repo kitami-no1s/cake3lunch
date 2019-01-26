@@ -21,10 +21,10 @@ $this->prepend ( 'script', $this->Html->script ( [
 $this->prepend ( 'script', $this->Html->script ( [
 		'//code.jquery.com/jquery-3.3.1.js'
 ] ) );
-// google map apiの読み込み
-$this->prepend ('script',$this->Html->script ([
-		"https://maps.googleapis.com/maps/api/js?key={GOOGLE_MAP}&callback=initMap"
-]));
+// google map api
+$this->prepend ( 'script', $this->Html->script ( [
+		"https://maps.googleapis.com/maps/api/js?key=".env('GOOGLE_MAP')."&callback=initMap"
+] ) );
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,6 +36,7 @@ $this->prepend ('script',$this->Html->script ([
 	<?=$this->fetch('css') ?>
 </head>
 <body>
+<?php echo env('GOOGLE_MAP');?>
     <div class="container">
         <div class="row">
             <div class ="col-12">
