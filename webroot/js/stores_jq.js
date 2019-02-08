@@ -1,8 +1,9 @@
 $(function(){
+
 	$('#search').on('click',function(){
 		//　検索ボタンをクリックしたときあいまい検索
 		var word = $('#station').val();
-		
+
 		$.ajax({
 			url: "/cake3lunch/stores/search",
 		    type: "POST",
@@ -22,7 +23,7 @@ $(function(){
 		    }
 		});
 	});
-	
+
 	$('#akasa span').on('click',function(){
 		//　五十音検索
 		event.stopPropagation();
@@ -47,7 +48,7 @@ $(function(){
 		    }
 		});
 	});
-	
+
 	$('#target div').on('click',function(){
 		var span = $(this).children("span");
 		if(span.css('display') == 'none'){
@@ -57,11 +58,11 @@ $(function(){
 			$('#akasa span').hide();
 		}
 	});
-	
+
 	$(document).on("click","#stations div",function(){
 		$("#station").val($(this).text());
 	});
-	
+
 	$('#btn').on('click',function(){
 		if($('#target').css('display') == 'block'){
 			$('#target').hide();

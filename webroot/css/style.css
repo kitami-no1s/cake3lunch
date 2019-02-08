@@ -19,7 +19,10 @@
 #aiu {
 	display: none;
 }
-
+#map {
+	height: 100%;
+	width: 100%;
+}
 .fade:not(.show) {
     opacity: 100;
 }
