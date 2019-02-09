@@ -5,7 +5,10 @@
     
     class StationsController extends AppController
     {
-        public function initializa()
+        public $paginate = [
+			'limit' => 5,
+	];
+        public function initialize()
         {
             parent::initialize();
             
@@ -46,21 +49,14 @@
         
         public function result($id)
         {
-            $query = $this->Stations->Stores->Comments
+            $this->loadComponent('Paginator');
+            $stores = $this->Paginator->paginate($this->Stations->Stores
                     ->find('all')
-                    ->contain(['Stores','Images'])
-                    ->contain('Stores.Stations', function (Query $q) {
-                        return $q
-                                ->select(['id'])
-                                ->where(['Stations.id' => $id]);
-                    })
-                    ->order(['created' => 'desc']);
-            /*
-            $this->paginate =[
-                'contain' => ['Images'],
-                'order' => ['created' => 'desc']
-            ];
-             */
-            $this->set('comments', $this->paginate($query));
+                    ->contain(['Stations','StationsStores'])
+                    ->matching('Stations', function($q) use ($id) {
+                        return $q->where(['Stations.id' => $id]);
+                    }));
+            $station = $this->Stations->get($id);
+            $this->set(compact('stores', 'station'));
         }
     }
