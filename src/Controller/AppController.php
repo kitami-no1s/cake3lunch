@@ -79,7 +79,7 @@ class AppController extends Controller
     {
         parent::beforeFilter($event);
         
-//        $this->Auth->allow(['index']);
+        $this->Auth->allow(['index', 'result']);
         $user = $this->Auth->user();
         $menu = 'menu';
         if($user){
@@ -90,7 +90,7 @@ class AppController extends Controller
         
         $lists = $this->Sidebar->index();
         
-        $this->set(compact('lists'));
+        $this->set(compact('lists', 'action'));
     }
     
     /**
