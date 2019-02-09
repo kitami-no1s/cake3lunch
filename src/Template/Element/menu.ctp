@@ -10,8 +10,8 @@
                 <li><?=$this->Html->link("コメント一覧", "/Comments/index", ["class" => "nav-link"])?></li>
             </ul>
             <ul class="navbar-nav">
-                <li><?=$this->Html->link("ログイン", "/users/login", ["class" => "dropdown-item"])?></li>
-                <li><?=$this->Html->link("ユーザ登録", "/users/register", ["class" => "dropdown-item"])?></li>
+                <li><?=$this->Html->link("ログイン", "/users/login", ["class" => "nav-link"])?></li>
+                <li><?=$this->Html->link("ユーザ登録", "/users/register", ["class" => "nav-link"])?></li>
             </ul>
         </div>
     </div>
