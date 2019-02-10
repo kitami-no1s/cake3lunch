@@ -39,13 +39,21 @@
             $this->set(compact('comment'));
         }
         
-        public function index()
+        public function index($user_id = "")
         {
-            
-            $this->paginate =[
-                'contain' => ['Users','Stores','Images'],
-                'order' => ['created' => 'desc']
-            ];
+            if(empty($user_id))
+            {
+                $this->paginate =[
+                    'contain' => ['Users','Stores','Images'],
+                    'order' => ['created' => 'desc']
+                ];
+            }else{
+                $this->paginate =[
+                    'contain' => ['Users','Stores','Images'],
+                    'conditions' => ['user_id' => $user_id],
+                    'order' => ['created' => 'desc']
+                ];
+            }
             $this->set('comments', $this->paginate($this->Comments));
         }
         
