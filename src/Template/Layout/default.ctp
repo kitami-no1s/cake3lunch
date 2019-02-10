@@ -36,7 +36,6 @@ $this->prepend ( 'script', $this->Html->script ( [
 	<?=$this->fetch('css') ?>
 </head>
 <body>
-<?php echo env('GOOGLE_MAP');?>
     <div class="container">
         <div class="row">
             <div class ="col-12">
