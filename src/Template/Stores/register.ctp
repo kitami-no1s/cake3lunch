@@ -19,5 +19,6 @@
 <?= $this->Form->text('address',["div"=>false,"label"=>false,"class"=>''])?>
     <?= $this->Form->button('登録');?>
     <?= $this->Form->end();?>
-    <div id="map"></div>
-    <?php $this->prepend('script',$this->Html->script('google_map'));?>
+<br/>
+<div id="map"></div>
+<?php $this->prepend('script',$this->Html->script('google_map'));?>
