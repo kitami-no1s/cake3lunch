@@ -3,10 +3,13 @@
 echo $this->Form->create ( $image, [ 
 		"enctype" => "multipart/form-data"
 ] );
-echo $this->Form->input ( 'file_name', [ 
-		"type" => "file",
-		"label" => ""
-] );
+for($i=$image_count; $i<3; $i++)
+{
+    echo $this->Form->input ( 'file_name_'.$i, [ 
+    		"type" => "file",
+    		"label" => ""
+    ] );
+}
 ?>
 <?php
 echo $this->Form->button ( "画像を登録する" );

@@ -14,6 +14,8 @@
             <td><?= $this->Html->link(h($comment->comment),['action' => 'detail',$comment->id]); ?></td>
             <td><?php if (isset($comment->images[0]->image_url)) { ?>
             	<?= $this->Html->image($comment->images[0]->image_url, ['alt' => 'Image', 'width' => '100', 'height' => '100']); ?>
+                		<?php if (count($comment->images) < 3) {?>
+                		<?= $this->Html->link("画像を追加する", ['controller' => 'images','action' => 'add', $comment->id ]); }?> 
             	<?php }else{ ?>
             	<?= $this->Html->link("画像を追加する", ['controller' => 'images','action' => 'add', $comment->id ]); ?> 
             </td>

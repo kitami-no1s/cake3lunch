@@ -26,3 +26,5 @@
 <div>
 <?= $comment->comment ?>
 </div>
+<div>
+<?= $this->Html->link("投稿一覧へ", ['action' => 'index']);?></div>

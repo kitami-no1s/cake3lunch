@@ -32,7 +32,7 @@
                 if ($this->Comments->save($comment)) {
                     $this->Flash->success(__('コメントを投稿しました'));
                     
-                    return $this->redirect(['action' => 'index']);
+                    return $this->redirect(['controller' => 'images', 'action' => 'add', $comment->id]);
                 }
                 $this->Flash->error(__('コメントの投稿に失敗しました'));
             }
