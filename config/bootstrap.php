@@ -49,13 +49,13 @@ use Cake\Utility\Security;
  * You should copy `config/.env.default to `config/.env` and set/modify the
  * variables as required.
  */
-// if (!env('APP_NAME') && file_exists(CONFIG . '.env')) {
-// $dotenv = new \josegonzalez\Dotenv\Loader([CONFIG . '.env']);
-// $dotenv->parse()
-// ->putenv()
-// ->toEnv()
-// ->toServer();
-// }
+ if (!env('APP_NAME') && file_exists(CONFIG . '.env')) {
+ $dotenv = new \josegonzalez\Dotenv\Loader([CONFIG . '.env']);
+ $dotenv->parse()
+ ->putenv()
+ ->toEnv()
+ ->toServer();
+ }
 
 /*
  * Read configuration file and inject configuration into various
@@ -99,7 +99,7 @@ date_default_timezone_set ( Configure::read ( 'App.defaultTimezone' ) );
 /*
  * Configure the mbstring extension to use the correct encoding.
  */
-mb_internal_encoding ( Configure::read ( 'App.encoding' ) );
+//mb_internal_encoding ( Configure::read ( 'App.encoding' ) );
 
 /*
  * Set the default locale. This controls how dates, number and currency is
