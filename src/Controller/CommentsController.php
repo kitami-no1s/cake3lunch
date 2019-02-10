@@ -43,9 +43,27 @@
         {
             
             $this->paginate =[
-                'contain' => ['Images'],
+                'contain' => ['Users','Stores','Images'],
                 'order' => ['created' => 'desc']
             ];
             $this->set('comments', $this->paginate($this->Comments));
+        }
+        
+        public function detail($comment_id)
+        {
+            try{
+             $comment = $this->Comments->get($comment_id, [
+                 'contain' => ['Users', 'Stores']
+             ]);
+            } catch (Exception $ex) {
+                $this->Flash->error(__('コメントの表示に失敗しました'));
+                return $this->redirect(['controller'=>'comments','action'=>'index']);
+            }
+            
+            $images = $this->Comments->Images
+                ->find()
+                ->where(['comment_id' => $comment->id]);
+            
+            $this->set(compact('comment','images'));
         }
     }
