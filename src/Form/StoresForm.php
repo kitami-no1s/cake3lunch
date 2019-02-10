@@ -13,19 +13,17 @@ class StoresForm extends Form {
 		return $schema;
 	}
 	protected function _buildValidator(Validator $validator) {
-		$validator->add ( 'name', 'length', [ 
-				'rule' => [ 
+		$validator->add ( 'name', 'length', [
+				'rule' => [
 						'minLength',
 						1
-				],
-				'message' => '店名は必須です'
+				]
 		] );
-		$validator->add ( 'add', 'length', [ 
-				'rule' => [ 
+		$validator->add ( 'address', 'length', [
+				'rule' => [
 						'minLength',
 						1
-				],
-				'message' => '住所は必須です'
+				]
 		] );
 		return $validator;
 	}
@@ -38,7 +36,7 @@ class StoresForm extends Form {
 		$this->Stores = TableRegistry::getTableLocator ()->get ( 'stores' );
 
 		try {
-			$store = $this->Stores->newEntity ( [ 
+			$store = $this->Stores->newEntity ( [
 					'name' => $data['name'],
 					'address' => $data['address']
 			] );
@@ -48,25 +46,25 @@ class StoresForm extends Form {
 			$store_id = $store->id;
 			$name = $data['station_name'];
 
-			$sub = $this->Stations->find ()->select ( [ 
+			$sub = $this->Stations->find ()->select ( [
 					'id'
-			] )->where ( [ 
+			] )->where ( [
 					'name' => $name
 			] )->first ();
 
-			$this->StationsStores->query ()->insert ( [ 
+			$this->StationsStores->query ()->insert ( [
 					'station_id',
 					'store_id'
-			] )->values ( [ 
+			] )->values ( [
 					'station_id' => $sub ['id'],
 					'store_id' => $store_id
 			] )->execute ();
 			// トランザクションコミット
 			$transaction->commit ();
-			
+
 			return true;
 		} catch ( \Exception $e ) {
-			
+
 			// SQLなかったことにする
 			$transaction->rollback ();
 			return false;

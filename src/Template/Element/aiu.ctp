@@ -7,6 +7,10 @@
 			id="aiu">く<br /></span> <span id="aiu">け<br /></span> <span id="aiu">こ<br /></span>
 	</div>
 	<div id="akasa">
+		さ<br /> <span id="aiu">さ<br /></span> <span id="aiu">し<br /></span> <span
+			id="aiu">す<br /></span> <span id="aiu">せ<br /></span> <span id="aiu">そ<br /></span>
+	</div>
+	<div id="akasa">
 		た<br /> <span id="aiu">た<br /></span> <span id="aiu">ち<br /></span> <span
 			id="aiu">つ<br /></span> <span id="aiu">て<br /></span> <span id="aiu">と<br /></span>
 	</div>
