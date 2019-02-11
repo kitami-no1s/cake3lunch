@@ -11,7 +11,7 @@ use App\Form\StoresForm;
 class StoresController extends AppController {
 	public $paginate = [
 			'contain' => 'stations',
-			'limit' => 5,
+			'limit' => 5
 	];
 	public function initialize() {
 		parent::initialize ();
@@ -26,15 +26,19 @@ class StoresController extends AppController {
 			// ajaxで送られてきた駅名をもとに検索、
 			$word = $this->request->getData ( 'word' );
 			$stations = TableRegistry::getTableLocator ()->get ( 'stations' );
-			$list = $stations->find ()->select(['name'])
-			->where(['name LIKE'=>'%'.$word.'%'])
-			->toArray();
+			$list = $stations->find ()->select ( [
+					'name'
+			] )->where ( [
+					'name LIKE' => '%' . $word . '%'
+			] )->toArray ();
 
 			$data = "";
-			foreach ( $list as $val ) {
-				$data .= "<div>" . $val ['name'] . "</div>";
+			if (!empty ( $list )) {
+				foreach ( $list as $val ) {
+					$data .= "<div>" . $val ['name'] . "</div>";
+				}
+				echo json_encode ( $data );
 			}
-			echo json_encode ( $data );
 		}
 	}
 	public function gojyuon() {
@@ -66,7 +70,7 @@ class StoresController extends AppController {
 						'controller' => 'stores',
 						'action' => 'index'
 				] );
-			}else{
+			} else {
 				$this->Flash->error ( __ ( 'お店の登録に失敗しました' ) );
 			}
 		}

@@ -11,7 +11,7 @@
 		<td><?= $this->Number->format($user->id) ?></td>
 		<td><?= h($user->name) ?></td>
 		<td><?= h($user->role) ?></td>
-		<td><?= $this->Html->link("投稿を見る", ['action' => 'status', $user->id ]); ?></td>
+		<td><?= $this->Html->link("投稿を見る", ['controller' => 'comments', 'action' => 'index', $user->id ]); ?></td>
 	</tr>
     <?php endforeach; ?>
 </table>
