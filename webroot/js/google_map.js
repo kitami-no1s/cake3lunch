@@ -1,9 +1,27 @@
-window.onload = function(){
-    var MyLatLng = new google.maps.LatLng(35.6811673, 139.7670516);
-    var Options = {
-        zoom: 15,      //地図の縮尺値
-        center: MyLatLng,    //地図の中心座標
-        mapTypeId: 'roadmap'   //地図の種類
-    };
-    var map = new google.maps.Map(document.getElementById('map'), Options);
+window.onload = function() {
+	var geocoder = new google.maps.Geocoder();// 緯度経度変換器。
+	var address = document.getElementById('map').val();
+	geocoder.geocode({
+		'address' : address,
+		'language' : 'ja'
+	}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+			var latlng = results[0].geometry.location;// 緯度と経度を取得
+			var mapOpt = {
+				center : latlng,// 取得した緯度経度を地図の真ん中に
+				zoom : 17,//　拡大率
+				mapTypeId : google.maps.MapTypeId.ROADMAP
+			// 普通の道路マップ
+			};
+			var map = new google.maps.Map(document.getElementById('map'),mapOpt);
+
+			var marker = new google.maps.Marker({// 住所のポイントにマーカーを立てる
+				position : map.getCenter(),
+				map : map
+			});
+		} else {
+			alert("Geocode was not successful for the following reason: "
+					+ status);
+		}
+	});
 }
