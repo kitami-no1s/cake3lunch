@@ -20,5 +20,3 @@
     <?= $this->Form->button('登録');?>
     <?= $this->Form->end();?>
 <br/>
-<div id="map"></div>
-<?php $this->prepend('script',$this->Html->script('google_map'));?>

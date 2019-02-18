@@ -77,7 +77,8 @@ class StoresController extends AppController {
 	}
 	public function index() {
 		$stores = $this->paginate ( $this->Stores );
+		$cnt = count($stores);
 
-		$this->set ( compact ( 'stores' ) );
+		$this->set ( compact ( 'stores','cnt' ) );
 	}
 }
