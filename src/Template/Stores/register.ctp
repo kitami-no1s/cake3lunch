@@ -1,5 +1,5 @@
 <?php $this->prepend('script',$this->Html->script('stores_jq'));?>
-<h1 class="page-header">店登録(仮)</h1>
+<h1 class="page-header">店登録</h1>
 <?= $this->Form->create();?>
 <div>店名</div>
 <?= $this->Form->text('name',["div"=>false,"label"=>false])?>
