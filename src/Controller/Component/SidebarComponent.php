@@ -9,7 +9,7 @@
         public function index()
         {
             $stations = TableRegistry::getTableLocator()->get('StationsStores');
-            $lists = $stations->find('all')->contain(['Stations'])->all();
+            $lists = $stations->find('all')->contain(['Stations'])->group('station_id')->all();
             return $lists;
         }
     }
