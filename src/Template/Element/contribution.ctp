@@ -11,7 +11,7 @@
             <td><?= $this->Number->format($comment->id) ?></td>
             <td><?= $comment->user->name; ?></td>
             <td><?= $comment->store->name; ?></td>
-            <td><?= $this->Html->link(h($comment->comment),['action' => 'detail',$comment->id]); ?></td>
+            <td><?= $this->Html->link(h($comment->comment),['controller' => 'comments', 'action' => 'detail',$comment->id]); ?></td>
             <td><?php if (isset($comment->images[0]->image_url)) { ?>
             	<?= $this->Html->image($comment->images[0]->image_url, ['alt' => 'Image', 'width' => '100', 'height' => '100']); ?>
             	<?php }else{ ?>

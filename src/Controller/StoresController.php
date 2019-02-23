@@ -81,4 +81,17 @@ class StoresController extends AppController {
 
 		$this->set ( compact ( 'stores','cnt' ) );
 	}
+        
+        public function comments($id)
+        {
+            $this->loadComponent('Paginator');
+            $comments = $this->Paginator->paginate($this->Stores->Comments
+                    ->find('all')
+                    ->contain(['Stores', 'Users', 'Images'])
+                    ->matching('Stores', function($q) use ($id) {
+                        return $q->where(['Stores.id' => $id]);
+                    }));
+            $store = $this->Stores->get($id);
+            $this->set(compact('comments', 'store'));
+        }
 }

@@ -10,7 +10,7 @@
     <?php foreach ($stores as $store):?>
         <tr>
 		<td><?= $this->Number->format($store->id) ?></td>
-		<td><?= h($store->name) ?></td>
+		<td><?= $this->Html->link(h($store->name), ['controller' => 'stores', 'action' => 'comments', $store->id ]); ?></td>
 		<td><?= h($store->address) ?></td>
 		<td><?= $this->Html->link("投稿する", ['controller' => 'comments','action' => 'add', $store->id ]); ?></td>
 	</tr>
