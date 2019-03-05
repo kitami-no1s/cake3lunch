@@ -50,13 +50,18 @@
         public function result($id)
         {
             $this->loadComponent('Paginator');
-            $stores = $this->Paginator->paginate($this->Stations->Stores
+            try {
+                $stores = $this->Paginator->paginate($this->Stations->Stores
                     ->find('all')
                     ->contain(['Stations','StationsStores'])
                     ->matching('Stations', function($q) use ($id) {
                         return $q->where(['Stations.id' => $id]);
                     }));
-            $station = $this->Stations->get($id);
-            $this->set(compact('stores', 'station'));
+                $station = $this->Stations->get($id);
+                $this->set(compact('stores', 'station'));
+            } catch(\Exception $e) {
+                $this->Flash->error(__('登録されていない駅が選択されました'));
+                return $this->redirect(['controller'=>'Comments','action'=>'index']);
+            }
         }
     }

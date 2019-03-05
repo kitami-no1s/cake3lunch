@@ -84,14 +84,19 @@ class StoresController extends AppController {
         
         public function comments($id)
         {
-            $this->loadComponent('Paginator');
-            $comments = $this->Paginator->paginate($this->Stores->Comments
+            try {
+                $this->loadComponent('Paginator');
+                $comments = $this->Paginator->paginate($this->Stores->Comments
                     ->find('all')
                     ->contain(['Stores', 'Users', 'Images'])
                     ->matching('Stores', function($q) use ($id) {
                         return $q->where(['Stores.id' => $id]);
-                    }));
-            $store = $this->Stores->get($id);
-            $this->set(compact('comments', 'store'));
+                }));
+                $store = $this->Stores->get($id);
+                $this->set(compact('comments', 'store'));
+            } catch (\Exception $e) {
+                $this->Flash->error(__('登録されていない駅が選択されました'));
+                return $this->redirect(['controller'=>'Comments','action'=>'index']);
+            }
         }
 }

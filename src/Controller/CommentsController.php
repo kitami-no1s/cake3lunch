@@ -23,7 +23,7 @@ class CommentsController extends AppController {
 		} catch ( \Exception $ex ) {
 			$this->Flash->error ( __ ( 'error' ) );
 			return $this->redirect ( [
-					'controller' => 'Users',
+					'controller' => 'Comments',
 					'action' => 'index'
 			] );
 		}
@@ -73,7 +73,7 @@ class CommentsController extends AppController {
 			$transaction->rollback ();
 			$this->Flash->error ( __ ( 'error' ) );
 			return $this->redirect ( [
-					'controller' => 'Users',
+					'controller' => 'Comments',
 					'action' => 'index'
 			] );
 		}
