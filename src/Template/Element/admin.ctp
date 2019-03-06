@@ -18,7 +18,7 @@
                     <ul class="dropdown-menu">
                         <li><?=$this->Html->link("店舗登録", "/stores/register", ["class" => "dropdown-item"])?></li>
                         <li><?=$this->Html->link("駅登録", "/stations/register", ["class" => "dropdown-item"])?></li>
-                        <li><?=$this->Html->link("料理登録", "/images/register", ["class" => "dropdown-item"])?></li>
+                        <li id="switch" class = "dropdown-item" style="display:none;">料理登録</li>
                     </ul>
                 </li>
             </ul>

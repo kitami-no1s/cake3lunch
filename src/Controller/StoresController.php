@@ -81,7 +81,7 @@ class StoresController extends AppController {
 
 		$this->set ( compact ( 'stores','cnt' ) );
 	}
-        
+
         public function comments($id)
         {
             $this->loadComponent('Paginator');
