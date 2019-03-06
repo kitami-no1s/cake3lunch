@@ -18,7 +18,13 @@
                     <ul class="dropdown-menu">
                         <li><?=$this->Html->link("店舗登録", "/stores/register", ["class" => "dropdown-item"])?></li>
                         <li><?=$this->Html->link("駅登録", "/stations/register", ["class" => "dropdown-item"])?></li>
-                        <li><?=$this->Html->link("料理登録", "/images/add", ["class" => "dropdown-item"])?></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <?=$this->Html->link("ランチ情報", "#", ["class" => "nav-link dropdown-toggle","data-toggle" =>"dropdown"]);?>
+                    <ul class="dropdown-menu">
+                        <li><?=$this->Html->link("コメント登録", "/Comments/add", ["class" => "dropdown-item"])?></li>
+                        <li><?=$this->Html->link("コメント一覧", "/Comments/index", ["class" => "dropdown-item"])?></li>
                     </ul>
                 </li>
             </ul>
