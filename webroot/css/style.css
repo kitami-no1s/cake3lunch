@@ -1,3 +1,40 @@
+#target {
+	display: none;
+	overflow: hidden;
+}
+
+#btn1 {
+	display: block;
+}
+
+#btn2 {
+	display: none;
+}
+
+#target div {
+	float: left;
+	margin-right: 30px;
+}
+
+#aiu {
+	display: none;
+}
+#map {
+	height: 100%;
+	width: 100%;
+}
 .fade:not(.show) {
     opacity: 100;
+}
+.container {
+    margin: 0;
+    padding: 0;
+}
+
+#map {
+	height : 260px;
+	width : 200px;
+}
+#post {
+	width : 100px;
 }

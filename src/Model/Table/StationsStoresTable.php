@@ -13,6 +13,8 @@ class StationsStoresTable extends Table
         parent::initialize($config);
         $this->setTable('stations_stores');
         $this->setPrimaryKey('id');
+        
+        $this->belongsTo('stations');
     }
     
 }

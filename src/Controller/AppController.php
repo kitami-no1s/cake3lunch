@@ -27,7 +27,7 @@ use Cake\Event\Event;
  */
 class AppController extends Controller
 {
-    
+
     /**
      * Initialization hook method.
      *
@@ -40,10 +40,11 @@ class AppController extends Controller
     public function initialize()
     {
         parent::initialize();
-        
+
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-        
+        $this->loadComponent('Sidebar');
+
         $this->loadComponent('Auth', [
             'authorize' => ['Controller'],
             'authenticate' => [
@@ -55,7 +56,7 @@ class AppController extends Controller
                 ]
             ],
             'loginRedirect' => [
-                'controller' => 'Users',
+                'controller' => 'Comments',
                 'action' =>'index'
             ],
             'logoutRedirect' => [
@@ -63,9 +64,9 @@ class AppController extends Controller
                 'action' => 'login',
             ],
             'authError' => 'ログインしてください',
-            //                'authError' => $this->Flash->error(__('ログインしてください')),
+            //'authError' => $this->Flash->error(__('ログインしてください')),
         ]);
-        
+
         /*
          * Enable the following components for recommended CakePHP security settings.
          * see http://book.cakephp.org/3.0/en/controllers/components/security.html
@@ -73,14 +74,25 @@ class AppController extends Controller
         //$this->loadComponent('Security');
         //$this->loadComponent('Csrf');
     }
-    
+
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-        
-        $this->Auth->allow(['index']);
+
+        $this->Auth->allow(['index','result', 'comments', 'detail']);
+        $user = $this->Auth->user();
+        $menu = 'menu';
+        if($user){
+            $this->set('auth', $user);
+            $menu = 'admin';
+        }
+        $this->set('menu', $menu);
+
+        $lists = $this->Sidebar->index();
+
+        $this->set(compact('lists', 'action'));
     }
-    
+
     /**
      * Before render callback.
      *
