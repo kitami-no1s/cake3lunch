@@ -84,6 +84,7 @@ class StoresController extends AppController {
 
         public function comments($id)
         {
+            $user = $this->Auth->user('id');
             try {
                 $this->loadComponent('Paginator');
                 $comments = $this->Paginator->paginate($this->Stores->Comments
@@ -93,7 +94,7 @@ class StoresController extends AppController {
                         return $q->where(['Stores.id' => $id]);
                 }));
                 $store = $this->Stores->get($id);
-                $this->set(compact('comments', 'store'));
+                $this->set(compact('comments', 'store', 'user'));
             } catch (\Exception $e) {
                 $this->Flash->error(__('登録されていない駅が選択されました'));
                 return $this->redirect(['controller'=>'Comments','action'=>'index']);

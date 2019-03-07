@@ -11,9 +11,11 @@
             <td><?= $comment->store->name; ?></td>
             <td><?= $this->Html->link(h($comment->comment),['controller' => 'comments', 'action' => 'detail',$comment->id]); ?></td>
             <td><?php if (isset($comment->images[0]->image_url)) { ?>
-            	<?= $this->Html->image($comment->images[0]->image_url, ['alt' => 'Image', 'width' => '100', 'height' => '100']); ?>
-            	<?php }else{ ?>
-            	<?= $this->Html->link("画像を追加する", ['controller' => 'images','action' => 'add', $comment->id ]); ?>
+            	<?= $this->Html->image($comment->images[0]->image_url, ['alt' => 'Image', 'width' => '90', 'height' => '90']); ?>
+            	<?php if (count($comment->images) < 3 && $comment->user_id == $user) {?>
+                		<?= $this->Html->link("画像追加", ['controller' => 'images','action' => 'add', $comment->id ]); }?> 
+            	<?php }elseif($comment->user_id == $user){ ?>
+            	<?= $this->Html->link("画像追加", ['controller' => 'images','action' => 'add', $comment->id ]); ?>
             </td>
         </tr>
     <?php }endforeach; ?>

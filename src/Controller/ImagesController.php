@@ -31,6 +31,12 @@ class ImagesController extends AppController
 			$this->Flash->error(__('error'));
 			return $this->redirect(['controller'=>'Users','action'=>'index']);
 		}
+		
+		$image_count = $this->Images
+		->find()
+		->where(['comment_id' => $comment_id])
+		->count();
+		
 		if($comment->user_id !== $user_id){
 			$this->Flash->error(__("編集権限がありません"));
 			return $this->redirect(['controller'=>'Users','action'=>'index']);
@@ -42,27 +48,41 @@ class ImagesController extends AppController
 			//move_upload_file
 			$dir = realpath(WWW_ROOT . "/img");
 			$limitFileSize = 1024 * 1024;
-			$temp['file']="";
+			$temp['file']=array();
 			try {
-				$temp['file'] = $this->file_upload($this->request->data['file_name'], $dir, $limitFileSize);
-				//dump($temp);
+                foreach($this->request->data as $value)
+                {
+                    if($value['error'] == UPLOAD_ERR_NO_FILE) {
+                        continue;
+                    }else{
+                        $temp['file'][] = $this->file_upload($value, $dir, $limitFileSize);
+                    }
+                }
 			} catch (RuntimeException $e){
 				//$this->Flash->error(__('ファイルのアップロードができませんでした.'));
 				//$this->Flash->error(__($e->getMessage()));
 				$this->Flash->error(__('画像が選択されていません'));
 				return $this->redirect(['controller'=>'Users', 'action'=>'index']);
 			}
-			$image->image_url=$temp['file'];
-                        $image->comment_id = $comment_id;
-			$image=$this->Images->patchEntity($image,$this->request->data);
-			if($this->Images->save($image)){
-				$this->Flash->success(__('画像を登録しました'));
+			if($temp['file'])
+			{
+			    $query = $this->Images->query();
+			    $query->insert(['comment_id', 'image_url']);
+			    // dataの数だけvalues追加
+			    foreach ($temp['file'] as $file) {
+			        $data = array();
+			        $data['image_url'] = $file;
+			        $data['comment_id'] = $comment_id;
+			        $query->values($data);
+			    }
+			    // 実行
+			    $query->execute();
 			}else{
 				$this->Flash->error(__('画像の登録に失敗しました'));
 			}
 			return $this->redirect(['controller'=>'Comments','action'=>'index']);
                 }
-                $this->set(compact('image'));
+                $this->set(compact('image', 'image_count'));
 
 		}
 
@@ -131,43 +151,4 @@ class ImagesController extends AppController
 		}
 		return $uploadFile;
 	}
-
-	public function change($product_id)
-	{
-		if($this->request->is(['patch','post','put'])){
-			//dump($this->request->data["id"]);
-			$this->mainImageQuery($product_id);
-			$this->Images
-				->query()
-				->update()
-				->set(['main_image'=>1])
-				->where(['id'=>$this->request->data["id"]])
-				->execute();
-			$this->Flash->success(__('main画像を変更しました'));
-			return $this->redirect(['controller'=>'products','action'=>'detail',$product_id]);
-		}
-		$this->Flash->error(__('main画像の変更に失敗しました'));
-		return $this->redirect(['controller'=>'MyPages','action'=>'index']);
-	}
-
-	private function mainImageQuery($product_id)
-	{
-		$product = $this->Images
-		->query()
-		->update()
-		->set(['main_image' => 0])
-		->where(['product_id' => $product_id])
-		->execute();
-	}
-
-	private function mainImageCount($product_id)
-	{
-		$c=$this->Images
-			->find()
-			->where(['product_id'=>$product_id])
-			->andwhere(['main_image'=>1])
-			->count();
-		return $c;
-	}
-
 }

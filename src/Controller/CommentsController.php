@@ -105,6 +105,8 @@ class CommentsController extends AppController {
 					]
 			];
 		}
+		$user = $this->Auth->user('id');
+		$this->set('user', $user);
 		$this->set ( 'comments', $this->paginate ( $this->Comments ) );
 	}
 	public function detail($comment_id) {

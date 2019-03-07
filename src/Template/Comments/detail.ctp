@@ -16,7 +16,7 @@
   <div class="modal-dialog">
   <div class="modal-body">
   <?= $this->Html->image($image->image_url, 
-      ['alt' => 'Image', 'data-toggle' => 'modal', 'data-target' => '#image-modal', 'class' => "aligncenter size-full wp-image-425"]); ?>
+      ['alt' => 'Image', 'data-toggle' => 'modal', 'data-target' => '#image-modal', 'class' => "aligncenter size-harf wp-image-425"]); ?>
   </div>
   </div>
   </div>
@@ -26,3 +26,5 @@
 <div>
 <?= $comment->comment ?>
 </div>
+<div>
+<?= $this->Html->link("投稿一覧へ", ['action' => 'index']);?></div>
