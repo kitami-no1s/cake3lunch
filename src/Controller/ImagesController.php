@@ -60,7 +60,7 @@ class ImagesController extends AppController
 			}else{
 				$this->Flash->error(__('画像の登録に失敗しました'));
 			}
-			return $this->redirect(['controller'=>'Users','action'=>'index']);
+			return $this->redirect(['controller'=>'Comments','action'=>'index']);
                 }
                 $this->set(compact('image'));
 

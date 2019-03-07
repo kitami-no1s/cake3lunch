@@ -11,7 +11,7 @@
     <?php foreach ($stores as $store):?>
     <tr>
 		<?= $this->Form->hidden(null,['value'=> $store->id]) ?>
-		<td><?= h($store->name) ?></td>
+		<td><?= $this->Html->link(h($store->name), ['controller' => 'stores', 'action' => 'comments', $store->id ]); ?></td>
 		<td>
             <?php foreach ($store->stations as $station): ?>
             	<?= h($station->name) ?>&nbsp

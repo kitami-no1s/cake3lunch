@@ -79,7 +79,7 @@ class AppController extends Controller
     {
         parent::beforeFilter($event);
 
-        $this->Auth->allow(['index','result']);
+        $this->Auth->allow(['index','result', 'comments', 'detail']);
         $user = $this->Auth->user();
         $menu = 'menu';
         if($user){
